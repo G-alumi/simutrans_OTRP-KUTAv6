@@ -1311,7 +1311,7 @@ void vehicle_t::calc_friction(const grund_t *gr)
 
 	// curve: higher friction
 	if(previous_direction != direction) {
-		current_friction = 8;
+		current_friction = 2;
 	}
 
 	// or a hill?
@@ -1320,11 +1320,11 @@ void vehicle_t::calc_friction(const grund_t *gr)
 		const uint slope_height = is_one_high(hang) ? 1 : 2;
 		if(  ribi_type(hang) == direction  ) {
 			// hill up, since height offsets are negative: heavy decelerate
-			current_friction += 15 * slope_height * slope_height;
+			current_friction += 4 * slope_height;
 		}
 		else {
 			// hill down: accelerate
-			current_friction += -7 * slope_height * slope_height;
+			current_friction += -2 * slope_height;
 		}
 	}
 }
@@ -4366,7 +4366,7 @@ void water_vehicle_t::calc_friction(const grund_t *gr)
 	// or a hill?
 	if(gr->get_weg_hang()) {
 		// hill up or down => in lock => decelerate
-		current_friction = 16;
+		current_friction = 6;
 	}
 	else {
 		// flat track
